@@ -1,0 +1,33 @@
+const express = require('express');
+const server = express();
+
+
+server.get("/user", (req, res, next) => {
+    res.status(200).json({ name: "Mg Mg", age: 28, subject: "NodeJS" });
+});
+
+server.post("/user", (req, res, next) => {
+    res.status(200).json({
+        msg: "User Register Successfully"
+    });
+});
+
+server.patch("/user/:id/:name", (req, res, next) => {
+    let id = req.params.id;
+    let name = req.params.name;
+    res.status(200).json({ id, name })
+})
+
+server.delete("/user/:id", (req, res, next) => {
+    let id = req.params.id;
+    res.json({ msg: "The deleted id is" + id });
+})
+
+server.get("*", (req, res, next) => {
+    res.json({ msg: "NO route found" });
+})
+
+
+server.listen(3000, () => {
+    console.log("Server is running at port 3000");
+});
